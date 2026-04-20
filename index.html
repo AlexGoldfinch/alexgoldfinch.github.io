@@ -9,8 +9,33 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     margin: 0;
-    background: #f5f6f8;
-    color: #111;
+    background: #0f1115;
+    color: #e5e7eb;
+}
+
+/* subtle grid */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -2;
+}
+
+/* glow */
+body::after {
+    content: "";
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(37,99,235,0.2), transparent 70%);
+    top: -200px;
+    left: -200px;
+    filter: blur(100px);
+    z-index: -1;
 }
 
 .container {
@@ -21,38 +46,54 @@ body {
 
 .hero {
     text-align: center;
-    padding: 80px 20px 60px;
+    padding: 120px 20px 90px;
 }
 
 .hero h1 {
-    font-size: 40px;
+    font-size: 42px;
     margin-bottom: 15px;
 }
 
 .hero p {
-    color: #555;
+    color: #9ca3af;
     font-size: 18px;
-    max-width: 600px;
+    max-width: 620px;
     margin: auto;
 }
 
-.cta {
-    margin-top: 25px;
-}
-
-.cta a {
+.btn {
     display: inline-block;
-    padding: 12px 20px;
-    background: #111;
+    padding: 13px 22px;
+    background: #2563eb;
     color: white;
-    border-radius: 8px;
+    border-radius: 12px;
     text-decoration: none;
+    margin-top: 30px;
+    transition: 0.25s;
 }
 
+.btn:hover {
+    transform: translateY(-2px);
+    background: #1d4ed8;
+}
+
+/* divider */
+.divider {
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 60px 0;
+}
+
+/* sections */
 .section {
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
+.section h2 {
+    margin-bottom: 20px;
+}
+
+/* cards */
 .cards {
     display: grid;
     gap: 20px;
@@ -60,35 +101,49 @@ body {
 }
 
 .card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    background: rgba(255,255,255,0.04);
+    padding: 22px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.25s;
 }
 
-.card h3 {
-    margin-top: 0;
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(37,99,235,0.4);
 }
 
 .card p {
-    color: #555;
+    color: #9ca3af;
 }
 
+/* steps */
 .steps {
     display: grid;
     gap: 15px;
 }
 
 .step {
-    background: white;
-    padding: 15px;
+    background: rgba(255,255,255,0.04);
+    padding: 16px;
     border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.08);
 }
 
-.footer {
-    margin-top: 80px;
+/* trust block */
+.trust {
     text-align: center;
-    color: #777;
+    max-width: 700px;
+    margin: auto;
+    color: #9ca3af;
+    font-size: 15px;
+}
+
+/* footer */
+.footer {
+    margin-top: 90px;
+    text-align: center;
+    color: #6b7280;
 }
 </style>
 
@@ -102,54 +157,55 @@ body {
 <div class="hero">
     <h1>Business Support & Administrative Services</h1>
     <p>
-        Remote operational support for entrepreneurs and businesses.
-        Clear processes, structured communication, and efficient execution.
+        Reliable operational support for entrepreneurs and businesses.
+        Structured workflows, clear communication, and efficient execution.
     </p>
 
-    <div class="cta">
-        <a href="mailto:contact@shchegolskyi.com">Contact</a>
-    </div>
+    <a class="btn" href="mailto:contact@shchegolskyi.com">Contact</a>
 </div>
+
+<div class="divider"></div>
 
 <!-- VALUE -->
 <div class="section">
     <div class="cards">
         <div class="card">
-            <h3>Flexible Support</h3>
-            <p>Services are provided based on actual business needs without long-term commitments.</p>
+            <h3>Flexible Engagement</h3>
+            <p>No long-term commitments. Work is performed based on actual needs and agreed scope.</p>
         </div>
 
         <div class="card">
-            <h3>Remote & Efficient</h3>
-            <p>All work is handled online using structured communication and organized workflows.</p>
+            <h3>Remote & Structured</h3>
+            <p>All processes are handled online with clear structure and predictable execution.</p>
         </div>
 
         <div class="card">
-            <h3>Process-Oriented</h3>
-            <p>Focus on clarity, consistency, and operational structure rather than ad-hoc execution.</p>
+            <h3>Execution Focused</h3>
+            <p>Focus on delivering results rather than advisory or abstract recommendations.</p>
         </div>
     </div>
 </div>
+
+<div class="divider"></div>
 
 <!-- SERVICES -->
 <div class="section">
     <h2>Services</h2>
 
     <div class="cards">
-
         <div class="card">
             <h3>Administrative Support</h3>
-            <p>Document preparation, formatting, and structured business documentation management.</p>
+            <p>Document preparation, formatting, and structured organization of business materials.</p>
         </div>
 
         <div class="card">
             <h3>Business Communication</h3>
-            <p>Email drafting, message structuring, and ongoing communication support.</p>
+            <p>Drafting and managing professional communication across different channels.</p>
         </div>
 
         <div class="card">
             <h3>Reports & Materials</h3>
-            <p>Preparation of business reports, summaries, and structured internal documents.</p>
+            <p>Preparation of structured reports, summaries, and internal business documentation.</p>
         </div>
 
         <div class="card">
@@ -164,11 +220,12 @@ body {
 
         <div class="card">
             <h3>Workflow Coordination</h3>
-            <p>Coordination of tasks, communication, and operational processes.</p>
+            <p>Coordination of tasks, communication, and operational execution.</p>
         </div>
-
     </div>
 </div>
+
+<div class="divider"></div>
 
 <!-- HOW IT WORKS -->
 <div class="section">
@@ -183,23 +240,28 @@ body {
     </div>
 </div>
 
-<!-- LEGAL -->
-<div class="section">
-    <h2>Service Format</h2>
+<div class="divider"></div>
+
+<!-- TRUST -->
+<div class="trust">
     <p>
-        Services are provided remotely and are of a support and administrative nature.
-        They do not constitute legal, financial, or licensed consulting services.
+        All services are provided in a structured, consistent, and confidential manner.
+        The focus is on operational support and execution without unnecessary complexity.
     </p>
 </div>
 
+<div class="divider"></div>
+
+<!-- CONTACT -->
 <div class="section">
     <h2>Contact</h2>
-    <p>contact@shchegolskyi.com</p>
+    <p style="color:#9ca3af;">contact@shchegolskyi.com</p>
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
     <p>Effective Date: 01 January 2025</p>
-    <p><a href="/terms">Terms of Service</a></p>
+    <a class="btn" href="/terms">Terms of Service</a>
 </div>
 
 </div>
