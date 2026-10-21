@@ -397,3 +397,78 @@ a:hover { text-decoration-thickness: 2px; }
 @media (max-width: 900px) { .process::before, .process::after { bottom: 60px; } }
 .contact-list.two { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 520px; } @media (max-width: 900px) { .contact-list.two { grid-template-columns: 1fr; } }
 .archived { margin: 10px 0 0; font-size: 15px; color: var(--muted); max-width: 70ch; }
+
+/* ===== Looping animations below the hero ===== */
+.fv .mtrack { stroke: var(--rule); stroke-width: 2; }
+.fv .mprog { stroke: var(--stamp); stroke-width: 2; transform-box: fill-box; transform-origin: left center; transform: scaleX(0); }
+.fv .mdot, .fv .n rect { transform-box: fill-box; transform-origin: center; }
+.dia .runner { fill: var(--stamp); stroke: none; transform-box: view-box; }
+.dia .ripple { fill: none; stroke: var(--stamp); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.dia rect.tickbar { transform-box: fill-box; transform-origin: center bottom; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Marketing plan: data flows along the links, bars breathe, roadmap advances */
+  .js [data-animate].in .fv .ln path { animation: mk-flow 1.1s linear infinite 1.6s; }
+  .js #marketing [data-animate].in .fv .hb { animation: mk-bar 6s ease-in-out infinite; animation-delay: calc(1.6s + var(--k) * .25s); }
+  .js #marketing [data-animate].in .fv .n[style*="--k:3"] rect { animation: mk-core 3s ease-in-out infinite 1.6s; }
+  .js #marketing [data-animate].in .fv .n[style*="--k:0"] rect,
+  .js #marketing [data-animate].in .fv .n[style*="--k:1"] rect,
+  .js #marketing [data-animate].in .fv .n[style*="--k:2"] rect { animation: mk-aud 6s ease-in-out infinite; animation-delay: calc(1.6s + var(--k) * 2s); }
+  .js #marketing [data-animate].in .fv .mprog { animation: mk-prog 9s ease-in-out infinite 1.8s; }
+  .js #marketing [data-animate].in .fv .mdot { animation: mk-dot 9s step-end infinite; animation-delay: 1.8s; }
+  .js #marketing [data-animate].in .fv .mdot[style*="--m:1"] { animation-name: mk-dot2; }
+  .js #marketing [data-animate].in .fv .mdot[style*="--m:2"] { animation-name: mk-dot3; }
+
+  /* Org chart: seats fill one by one, then the wave empties and repeats */
+  .js #teams [data-animate].in .fv .seat-bg { animation: seat-bg 10s ease infinite; animation-delay: calc(1.6s + var(--k) * .45s); }
+  .js #teams [data-animate].in .fv .seat-p { animation: seat-p 10s ease infinite; animation-delay: calc(1.6s + var(--k) * .45s); }
+  .js #teams [data-animate].in .fv .seat { animation: seat-pop 10s ease infinite; animation-delay: calc(1.6s + var(--k) * .45s); }
+
+  /* Process: a task moves along the steps */
+  .js .process.in .pico { animation: step-pulse 7.5s ease-in-out infinite; }
+  .js .process.in li:nth-child(1) .pico { animation-delay: 2s; }
+  .js .process.in li:nth-child(2) .pico { animation-delay: 3.5s; }
+  .js .process.in li:nth-child(3) .pico { animation-delay: 5s; }
+  .js .process.in li:nth-child(4) .pico { animation-delay: 6.5s; animation-name: step-pulse-key; }
+  .js .process.in li:nth-child(5) .pico { animation-delay: 8s; }
+
+  /* Ways to work together */
+  .formats.in .dia rect.tickbar { animation: tick 4s ease-in-out infinite; animation-delay: calc(var(--i) * .3s); }
+  .formats.in .dia .runner { animation: run 4.5s cubic-bezier(.5,0,.3,1) infinite; }
+  .formats.in .dia .ripple { animation: ripple 2.4s ease-out infinite; }
+}
+
+@keyframes mk-flow { from { stroke-dasharray: 5 7; stroke-dashoffset: 24; } to { stroke-dasharray: 5 7; stroke-dashoffset: 0; } }
+@keyframes mk-bar { 0%, 100% { transform: scaleX(1); } 45% { transform: scaleX(.55); } }
+@keyframes mk-core { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes mk-aud { 0%, 30%, 100% { stroke: #cfd6e6; fill: #fff; } 8%, 22% { stroke: #2b4a8b; fill: #e7ecf6; } }
+@keyframes mk-prog { 0% { transform: scaleX(0); } 33% { transform: scaleX(.5); } 66%, 90% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+@keyframes mk-dot { 0% { fill: #2b4a8b; } 100% { fill: #2b4a8b; } }
+@keyframes mk-dot2 { 0% { fill: #fff; } 33% { fill: #2b4a8b; } 95% { fill: #fff; } }
+@keyframes mk-dot3 { 0% { fill: #fff; } 66% { fill: #2b4a8b; } 95% { fill: #fff; } }
+
+@keyframes seat-bg {
+  0% { fill: #fff; stroke: #d3d8d0; stroke-dasharray: 3 4; }
+  6%, 80% { fill: #2b4a8b; stroke: #2b4a8b; stroke-dasharray: none; }
+  92%, 100% { fill: #fff; stroke: #d3d8d0; stroke-dasharray: 3 4; }
+}
+@keyframes seat-p { 0% { stroke: #c3c9c0; } 6%, 80% { stroke: #fff; } 92%, 100% { stroke: #c3c9c0; } }
+@keyframes seat-pop { 0%, 12%, 100% { transform: scale(1); } 4% { transform: scale(1.12); } }
+
+@keyframes step-pulse {
+  0%, 22%, 100% { box-shadow: 0 0 0 0 rgba(43, 74, 139, 0); background: var(--sheet); color: var(--ink); }
+  5% { box-shadow: 0 0 0 10px rgba(43, 74, 139, .12); background: var(--stamp-tint); color: var(--stamp); }
+  14% { box-shadow: 0 0 0 4px rgba(43, 74, 139, .08); background: var(--stamp-tint); color: var(--stamp); }
+}
+@keyframes step-pulse-key {
+  0%, 22%, 100% { box-shadow: 0 0 0 0 rgba(43, 74, 139, 0); }
+  5% { box-shadow: 0 0 0 12px rgba(43, 74, 139, .18); }
+  14% { box-shadow: 0 0 0 5px rgba(43, 74, 139, .1); }
+}
+
+@keyframes tick { 0%, 100% { fill: var(--stamp-tint); transform: scaleY(1); } 12% { fill: var(--stamp); transform: scaleY(1.15); } 30% { fill: var(--stamp-tint); transform: scaleY(1); } }
+@keyframes run { 0% { transform: translateX(0); opacity: 0; } 8% { opacity: 1; } 80% { transform: translateX(190px); opacity: 1; } 92%, 100% { transform: translateX(190px); opacity: 0; } }
+@keyframes ripple { 0% { opacity: .6; transform: scale(1); } 100% { opacity: 0; transform: scale(2.4); } }
+@media (prefers-reduced-motion: no-preference) {
+  .js #teams [data-animate].in .fv .seat-bg, .js #teams [data-animate].in .fv .seat-p { animation-fill-mode: backwards; }
+}
